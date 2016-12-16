@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\usepackage{anyfontsize}
+\usepackage{multicol}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{color}
+
+% Define colors
+\definecolor{gray}{RGB}{80, 80, 80}
+
+% Define margins
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+
+% Column spacing
+\setlength{\columnsep}{.875in}
+
+% Title spacing
+\titlespacing*{\section}{0pt}{15pt}{10pt}
+\titlespacing*{\subsection}{0pt}{12pt}{2pt}
+
+% define main font type
+\setmainfont[Ligatures=TeX]{\VAR{fonts['body']}}
+
+% title
+\title{\vspace{-2cm} \fontspec{\VAR{fonts['title']}} \fontsize{30}{5} \selectfont \VAR{title}}
+\BLOCK{if date is defined}\date{\vspace{-1cm} \VAR{date}}\BLOCK{else}\date{}\BLOCK{endif}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{multicols*}{2}
+
+% create a section for each course of the menu
+\BLOCK{for course in courses}
+\section*{\fontsize{20}{5}\fontspec{\VAR{fonts['title']}}\VAR{course['name']}}
+
+\BLOCK{if 'items' in course}
+\BLOCK{for item in course['items']}
+
+% create a subsection for each item on the menu
+\subsection*{\textcolor{gray}{\fontsize{12}{5}\VAR{item['name']}}}
+
+  % If the item has a description, print it.
+  \BLOCK{if 'description' in item}\textcolor{gray}{\fontsize{10}{5}\VAR{item['description']}}\BLOCK{endif}
+
+\BLOCK{endfor}
+\BLOCK{endif}
+
+\BLOCK{endfor}
+
+\end{multicols*}
+
+\end{document}

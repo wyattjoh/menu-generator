@@ -1,0 +1,6 @@
+menu.tex
+*.aux
+*.log
+*.pdf
+venv
+menu.yaml
